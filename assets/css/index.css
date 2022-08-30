@@ -4,6 +4,15 @@ body {
 
 h1 {
   text-align: center;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.info {
+  text-align: center;
   margin: 40px 0;
 }
 

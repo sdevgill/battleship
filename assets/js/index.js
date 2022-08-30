@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let board = new Board();
   console.log(board.grid);
 
+  const h2 = document.querySelector("h2");
+
   const createContainer = (className) => {
     const container = document.createElement("div");
     container.className = className;
@@ -33,22 +35,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createContainer('container');
   createGrid(board.numRows, board.numCols);
+  // const winMessage = createParagraph("win-message", "You win!");
+  // winMessage.style.display = "none";
+  // document.querySelector(".container").appendChild(winMessage);
+
+  let won = false;
 
   const hits = e => {
-    const row = e.target.getAttribute("data-row");
-    const col = e.target.getAttribute("data-col");
-    // Print the result of the hit to the console
-    console.log(row, col);
-    // console.log(board.makeHit(row, col));
-    const hit = board.makeHit(row, col);
-    const squareNum = createParagraph("square-num", board.grid[row][col]);
-    // If player clicks a square with no ship, change the color to red, else change the color to green with ship number
-    if (hit === null) {
-      e.target.style.backgroundColor = "red";
-    } else if (hit !== null) {
-      e.target.style.backgroundColor = "green";
-      e.target.appendChild(squareNum);
+    if (!won) {
+      const row = e.target.getAttribute("data-row");
+      const col = e.target.getAttribute("data-col");
+      // Print the result of the hit to the console
+      console.log(row, col);
+      // console.log(board.makeHit(row, col));
+      const hit = board.makeHit(row, col);
+      const squareNum = createParagraph("square-num", board.grid[row][col]);
+      // If player clicks a square with no ship, change the color to red, else change the color to green with ship number
+      if (hit === null) {
+        e.target.style.backgroundColor = "red";
+      } else if (hit !== null) {
+        e.target.style.backgroundColor = "green";
+        e.target.appendChild(squareNum);
+      }
+
+      if (board.isGameOver()) {
+        h2.innerText = "You win!";
+        won = true;
+      }
     }
+
   }
 
   document.addEventListener('click', hits);
