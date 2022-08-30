@@ -12,9 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(container);
   }
 
+  const createParagraph = (className, text) => {
+    const paragraph = document.createElement("p");
+    paragraph.className = className;
+    paragraph.innerText = text;
+    return paragraph;
+  }
+
   const createGrid = (rows, cols) => {
-    for (let i = 1; i <= rows; i++) {
-      for (let j = 1; j <= cols; j++) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
         const square = document.createElement("div");
         square.className = "square";
         square.setAttribute("data-row", i);
@@ -26,6 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createContainer('container');
   createGrid(board.numRows, board.numCols);
+
+  const hits = e => {
+    const row = e.target.getAttribute("data-row");
+    const col = e.target.getAttribute("data-col");
+    // Print the result of the hit to the console
+    console.log(row, col);
+    // console.log(board.makeHit(row, col));
+    const hit = board.makeHit(row, col);
+    const squareNum = createParagraph("square-num", board.grid[row][col]);
+    // If player clicks a square with no ship, change the color to red, else change the color to green with ship number
+    if (hit === null) {
+      e.target.style.backgroundColor = "red";
+    } else if (hit !== null) {
+      e.target.style.backgroundColor = "green";
+      e.target.appendChild(squareNum);
+    }
+  }
+
+  document.addEventListener('click', hits);
 
 });
 
