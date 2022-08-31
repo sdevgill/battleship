@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let board = new Board();
   console.log(board.grid);
 
-  const h2 = document.querySelector("h2");
-
   const createContainer = (className) => {
     const container = document.createElement("div");
     container.className = className;
@@ -33,14 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  createContainer('container');
-  createGrid(board.numRows, board.numCols);
-  // const winMessage = createParagraph("win-message", "You win!");
-  // winMessage.style.display = "none";
-  // document.querySelector(".container").appendChild(winMessage);
-
-  let won = false;
-
   const hits = e => {
     if (!won) {
       const row = e.target.getAttribute("data-row");
@@ -65,6 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
   }
+
+  const h2 = document.querySelector("h2");
+  createContainer('container');
+  createGrid(board.numRows, board.numCols);
+
+  let won = false;
 
   document.addEventListener('click', hits);
 

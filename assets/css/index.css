@@ -2,16 +2,16 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
+.title {
   text-align: center;
 }
 
-h2 {
+.game-status {
   text-align: center;
   margin-top: 40px;
 }
 
-.info {
+.game-info {
   text-align: center;
   margin: 40px 0;
 }
