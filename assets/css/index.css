@@ -38,3 +38,8 @@ body {
   padding: 10px;
   text-align: center;
 }
+
+#reset-game {
+  display: block;
+  margin: 50px auto;
+}

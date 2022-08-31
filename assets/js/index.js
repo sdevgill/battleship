@@ -1,8 +1,10 @@
 import Board from "./board.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Examine the grid of the game board in the browser console
-  // Create the UI of the game using HTML elements based on this grid
+  const h2 = document.querySelector("h2");
+  const resetButton = document.getElementById("reset-game");
+
+  let won = false;
   let board = new Board();
   console.log(board.grid);
 
@@ -11,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     container.className = className;
     document.body.appendChild(container);
   }
+
+  createContainer('container');
 
   const createParagraph = (className, text) => {
     const paragraph = document.createElement("p");
@@ -31,16 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  createGrid(board.numRows, board.numCols);
+
   const hits = e => {
     if (!won) {
       const row = e.target.getAttribute("data-row");
       const col = e.target.getAttribute("data-col");
-      // Print the result of the hit to the console
       console.log(row, col);
       // console.log(board.makeHit(row, col));
       const hit = board.makeHit(row, col);
       const squareNum = createParagraph("square-num", board.grid[row][col]);
-      // If player clicks a square with no ship, change the color to red, else change the color to green with ship number
+
       if (hit === null) {
         e.target.style.backgroundColor = "red";
       } else if (hit !== null) {
@@ -53,27 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
         won = true;
       }
     }
-
   }
 
-  const h2 = document.querySelector("h2");
-  createContainer('container');
-  createGrid(board.numRows, board.numCols);
-
-  let won = false;
+  const resetGame = () => {
+    won = false;
+    h2.innerText = "";
+    board = new Board();
+    document.querySelector(".container").innerHTML = "";
+    createGrid(board.numRows, board.numCols);
+    console.log(board.grid);
+    // document.location.reload();
+  }
 
   document.addEventListener('click', hits);
-
+  resetButton.addEventListener('click', resetGame);
 });
-
-
-// Grid:
-// [null,    3, null, null, null, null, null, null, null]
-// [null,    3, null, null, null, null, null, null, null]
-// [null,    3,    3, null, null, null, null, null, null]
-// [null, null,    3, null,    5,    5,    5,    5,    5]
-// [null, null,    3, null, null, null, null, null, null]
-// [null,    4, null, null, null, null, null, null, null]
-// [null,    4, null, null, null, null, null, null, null]
-// [null,    4, null, null, null, null, null, null,    2]
-// [null,    4, null, null, null, null, null, null,    2]
