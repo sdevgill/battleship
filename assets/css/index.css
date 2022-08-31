@@ -23,7 +23,7 @@ body {
   justify-items: center;
   align-items: center;
   max-width: 400px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   grid-gap: 3px;
 }
 

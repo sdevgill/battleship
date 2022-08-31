@@ -83,4 +83,5 @@ document.addEventListener("DOMContentLoaded", () => {
 // Todo:
 // Refactor code to reset game with startGame()
 // Add AI to game
+// Add ship placement
 // Add score
