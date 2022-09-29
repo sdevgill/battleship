@@ -1,5 +1,7 @@
 # Battleship Game
 
+[Live Demo](https://sdevgill.github.io/battleship/)
+
 This is an implementation of the classic Battleship game.
 UI is done with HTML elements and CSS - and the game interactivity is by utilizing event listeners.
 
